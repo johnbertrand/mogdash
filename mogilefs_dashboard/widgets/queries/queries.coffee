@@ -1,4 +1,4 @@
-class Dashing.Graph extends Dashing.Widget
+class Dashing.Queries extends Dashing.Widget
 
   @accessor 'current', ->
     return @get('displayedValue') if @get('displayedValue')
@@ -15,7 +15,7 @@ class Dashing.Graph extends Dashing.Widget
       element: @node
       width: width
       height: height
-      renderer: "line"
+      renderer: @get("graphtype")
       series: [
         {
         color: "#f3f",
