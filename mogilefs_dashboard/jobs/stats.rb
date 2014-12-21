@@ -21,25 +21,32 @@ SCHEDULER.every '1s', :first_in => 0 do |job|
   socket.recv(1024).split( /\r?\n/ ).each do |line|
      stats[line.split[0]] = line.split[1]
   end
-  
-  points.shift
+ 
   last_x += 1
   
-   
+  points.shift
   #The differnce between the last sample and now
-  d =  stats['queries'].to_i -  last_y 
-
- 
-  
-  points << { x: last_x, y:  d }
-  
- 
+  points << { x: last_x, y:  stats['queries'].to_i -  last_y  }
   last_y =  stats['queries'].to_i
   
-  
-  puts "----end----"
-  send_event('uptime',   { uptime: Time.at(stats['uptime'].to_i).utc.strftime("%H:%M:%S") })
+  #send_event('uptime',   { fs1uptime: Time.at(stats['uptime'].to_i).utc.strftime("%H:%M:%S") })
   send_event('queries',  { points: points, queriesnow: stats['queries'], title: "Queries Per Second" })
 end
 
+SCHEDULER.every '5s', :first_in => 0 do |job|
+  socket.puts "!stats"
+  socket.recv(1024).split( /\r?\n/ ).each do |line|
+     stats[line.split[0]] = line.split[1]
+  end
+ 
+  last_x += 1
+  
+  points.shift
+  #The differnce between the last sample and now
+  points << { x: last_x, y:  stats['queries'].to_i -  last_y  }
+  last_y =  stats['queries'].to_i
+  
+  send_event('uptime',   { fs1uptime: Time.at(stats['uptime'].to_i).utc.strftime("%H:%M:%S") })
+  #send_event('queries',  { points: points, queriesnow: stats['queries'], title: "Queries Per Second" })
+end
 
