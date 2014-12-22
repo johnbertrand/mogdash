@@ -1,9 +1,9 @@
 require 'socket'
 host =  'localhost'
-port =  '9001'
+port =  '9002'
 socket = TCPSocket.open(host,port)
 uptime = -1
-instance_id="fs1"
+instance_id="fs2"
 uptime_interval='1s'
 interval='1s'
 
@@ -21,17 +21,16 @@ last_y=0
 SCHEDULER.every interval, :first_in => 0 do |job|
   socket.puts "!stats"
   socket.recv(1024).split( /\r?\n/ ).each do |line|
-     stats[line.split[0]] = line.split[1]
+    stats[line.split[0]] = line.split[1]
   end
- 
+
   last_x += 1
-  
+
   points.shift
   #The differnce between the last sample and now
   points << { x: last_x, y:  stats['queries'].to_i -  last_y  }
   last_y =  stats['queries'].to_i
-  
 
-  send_event('mogile',  { points: points, queriesnow: stats['queries'], uptime: Time.at(stats['uptime'].to_i).utc.strftime("%H:%M:%S")})
+
+  send_event('fs2',  { points: points, queriesnow: stats['queries'], uptime: Time.at(stats['uptime'].to_i).utc.strftime("%H:%M:%S")})
 end
-
