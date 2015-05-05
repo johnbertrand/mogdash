@@ -13,7 +13,7 @@ Here is how to make it .
 
 5) Edit the send_events in SCHEDULER loop.  Just append or delete values in the json string as needed.  Right now it's setup for 3 trackers(fs1,fs2,fs3.)  Hacky, I know, I'm sorry.
 
-6)edit the widgets/mogile.coffee script.  In the ready: block edit the series array. Make sure you have the same amount of series as you do trackers.  It's currently set to three, just copy and paste the blocks as needed.  You also need to edit the graph.series array right below adding a @get for each set of data.  Copy/Paste, delete as needed.  You will also need to set the series.data in the onData: event.  Just follow the convention there and all will work.
+6)edit the widgets/mogile.coffee script.  In the ready: block edit the series array. Make sure you have the same amount of series as you do trackers.  It's currently set to three, just copy and paste the blocks as needed.  You also need to edit the graph.series array right below adding a @get for each set of data.  Copy/Paste, delete as needed.  You will also need to set the series.data in the onData: event.  Just follow the convention there and it will work.
 
 Please feel free to contact me if you need any help getting this going.  
 
