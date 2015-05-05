@@ -1,7 +1,16 @@
-<h1 class="title" data-bind="title"></h1>
-
-<h2 class="value" data-bind="current | prettyNumber | prepend prefix"></h2>
-
-<p class="value" data-bind="queriesnow | prettyNumber | prepend prefix"></p>
-
-<p class="more-info" data-bind="uptime"></p>
+<h1 class="title" >MogileFS</h1>
+<h3 class="value" data-bind="qps"></h3>
+<div class="stats-holder">
+<div class="stats-box">
+    <p>Queries Per Second</p>
+    <p class="fs1" data-bind="currentfs1">FS1: 123,456 </p>
+    <p class="fs2" data-bind="currentfs2">FS2: 123,456 </p>
+    <p class="fs3" data-bind="currentfs3">FS3: 123,456 </p>
+</div>
+<div class="stats-box">
+    <p>Total Queries</p>
+    <p class="fs1" data-bind="fs1meta">FS1: 123,456 </p>
+    <p class="fs2" data-bind="fs2meta">FS2: 123,456 </p>
+    <p class="fs3" data-bind="fs3meta">FS3: 123,456 </p>
+</div>
+</div>
